@@ -30,4 +30,9 @@ public class PersonDAO {
         person.setId(++PEOPLE_COUNT);
         people.add(person);
     }
+
+    public void update(int id, Person personUpdate) {
+        Person personToByUpdate = show(id);
+        personToByUpdate.setName(personUpdate.getName());
+    }
 }
