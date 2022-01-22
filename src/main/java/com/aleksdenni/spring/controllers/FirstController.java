@@ -27,28 +27,25 @@ public class FirstController {
     }
 
     @GetMapping("/calculator")
-    public String calculator(@RequestParam(value = "a",required = false)String a,
-                             @RequestParam(value = "b", required = false)String b,
+    public String calculator(@RequestParam(value = "a",defaultValue = "0.0")double a,
+                             @RequestParam(value = "b", defaultValue = "0.0")double b,
                              @RequestParam(value = "action", defaultValue = "empty")String action,
                              Model model){
         System.out.println(a + " " + b + " " + action);
         String result;
-        double a1 = Double.parseDouble(a);
-        double a2 = Double.parseDouble(b);
         double res = 0;
-
         switch (action){
             case "multiplication":
-                res=a1*a2;
+                res=a*b;
                 break;
             case "addition":
-                res=a1+a2;
+                res=a+b;
                 break;
             case "subtraction":
-                res=a1-a2;
+                res=a-b;
                 break;
             case "division":
-                res=Math.round(a1/a2);
+                res=a/b;
                 break;
         }
         result =  String.valueOf(res);
