@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New Person</title>
-</head>
-<body>
-<form th:method="POST" th:action="@{/people}" th:object="${person}">
-    <label for="name">Enter your name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    </br>
-    <input type="submit" value="Create"/>
-</form>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>New Person</title>
+    </head>
+    <body>
+        <form th:method="POST" th:action="@{/people}" th:object="${person}">
+            <label for="name">Enter name: </label>
+            <input type="text" th:field="*{name}" id="name"/>
+            <strong style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >name error text</strong>
+            </br>
+
+            <label for="age">Enter age: </label>
+            <input type="text" th:field="*{age}" id="age"/>
+            <strong style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" >age error text</strong>
+            </br>
+
+            <label for="email">Enter email: </label>
+            <input type="text" th:field="*{email}" id="email"/>
+            <strong style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >email error text</strong>
+            </br>
+
+            <input type="submit" value="Create"/>
+        </form>
+    </body>
 </html>

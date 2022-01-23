@@ -65,6 +65,13 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.2.0.Final</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>
@@ -106,7 +113,7 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
+            <configuration>
                   <source>8</source>
                   <target>8</target>
               </configuration>
