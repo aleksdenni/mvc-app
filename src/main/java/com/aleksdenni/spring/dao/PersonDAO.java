@@ -1,10 +1,10 @@
 package com.aleksdenni.spring.dao;
+
 import com.aleksdenni.spring.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import com.aleksdenni.spring.dao.PersonMapper;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class PersonDAO {
             e.printStackTrace();
         }
         return people;*/
-        return jdbcTemplate.query("SELECT * FROM person", new PersonMapper());
+        return jdbcTemplate.query("SELECT * FROM person", new PersonMapper()); //new BeanPropertyRowMapper<>(Person.class) - Didn't work !
     }
 
     public Person show(int id){
@@ -77,9 +77,8 @@ public class PersonDAO {
             e.printStackTrace();
         }
         return person;*/
-        return jdbcTemplate.query("SELECT * FROM person WHERE id=?",
-                new Object[]{id},
-                new PersonMapper())
+        return jdbcTemplate.query("SELECT * FROM person WHERE id=? ;",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
     }
 
@@ -110,8 +109,8 @@ public class PersonDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
-        jdbcTemplate.update("UPDATE person SET id=?, name=?, age=?, email=? WHERE id=? ",
-                personUpdate.getName(), personUpdate.getAge(), personUpdate.getEmail());
+        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=? WHERE id=? ",
+                personUpdate.getName(), personUpdate.getAge(), personUpdate.getEmail(), id);
     }
 
     public void delete(int id) {
